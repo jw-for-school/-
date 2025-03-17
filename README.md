@@ -1,6 +1,7 @@
 # Deepfake Detection AI Documentation
 
 인공지능 프로그래밍 보고서, 우지원
+팀 노션 : https://www.notion.so/AI-Programming-Team-Project-1b39e49e58c9808cafdbd5a6d1ae6b81 
 
 <br>
 
@@ -173,8 +174,20 @@ GAN은 매우 강력한 생성 모델이지만, 몇 가지 단점도 가지고 �
 
 ## 5. 관련 문서
 
-- What is GAN? : [https://aws.amazon.com/what-is/gan/?nc1=h_ls](https://aws.amazon.com/what-is/gan/?nc1=h_ls)
-- GAN에 대한 이해 : [https://medium.com/@hugmanskj/gan%EC%97%90-%EB%8C%80%ED%95%9C-%EC%9D%B4%ED%95%B4-a073a5425ef2](https://medium.com/@hugmanskj/gan%EC%97%90-%EB%8C%80%ED%95%9C-%EC%9D%B4%ED%95%B4-a073a5425ef2)
-- 누가 진짜일까? 딥페이크 생성과 탐지 : [https://www.samsungsds.com/kr/insights/220411deepfake_1.html](https://www.samsungsds.com/kr/insights/220411deepfake_1.html)
-
+- What is GAN? : https://aws.amazon.com/what-is/gan/?nc1=h_ls
+- GAN에 대한 이해 : https://medium.com/@hugmanskj/gan%EC%97%90-%EB%8C%80%ED%95%9C-%EC%9D%B4%ED%95%B4-a073a5425ef2
+- 누가 진짜일까? 딥페이크 생성과 탐지 : https://www.samsungsds.com/kr/insights/220411deepfake_1.html
 - Keras vs Tensorflow vs Pytorch : https://www.geeksforgeeks.org/keras-vs-tensorflow-vs-pytorch/
+- Dlib : https://github.com/davisking/dlib
+- 딥페이크 데이터셋/툴/논문/코드 모음 : https://github.com/Daisy-Zhang/Awesome-Deepfakes?tab=readme-ov-file
+- 오토인코더란?
+- GAN vs Autoencoder
+
+<br>
+
+그 외 : 제 깃허브의 star list 참고 부탁드립니다 
+
+<br><br>
+
+---
+## 6. 관련 용어 정리 (추가예정)
