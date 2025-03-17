@@ -139,6 +139,35 @@ GAN은 매우 강력한 생성 모델이지만, 몇 가지 단점도 가지고 �
 
 ## 4. 딥페이크 영상 탐지 AI에 필요한 것
 
+### 개발 환경과 프레임워크 
+
+- 딥러닝 프레임워크 : PyTorch, TensorFlow, Keras
+- 이미지 및 비디오 처리 : OpenCV
+- 머신러닝 알고리즘 및 평가도구 : scikit-learn
+- 얼굴 감지 및 랜드마크 추출 : Dlib
+- 데이터 처리 및 분석 : Numpy, Pandas
+
+<br>
+
+### 데이터셋
+
+- [FaceForensics++](https://github.com/ondyari/FaceForensics) : 다양한 딥페이크 기법으로 조작된 비디오 데이터셋
+- [DeepFake Detection Challenge (DFDC)](https://ai.meta.com/datasets/dfdc/) : Facebook 주관의 대규모 데이터셋
+- [Celeb-DF](https://github.com/yuezunli/celeb-deepfakeforensics) : 유명 인물 기반 딥페이크 데이터셋
+- DF-TIMIT : 음성과 영상 모두 포함된 딥페이크 데이터셋
+- UADFV (UCLA Anomaly Detection Dataset for Video ): 비디오 기반 이상 탐지 데이터셋
+
+<br>
+
+### 모델 아키텍쳐
+
+- [ResNet (Residual Network)](https://arxiv.org/abs/1512.03385) : 이미지 분류 및 특징 추출
+- [EfficientNet](https://arxiv.org/abs/1905.11946) : 고효율 CNN 모델
+- [XceptionNet](https://arxiv.org/abs/1610.02357) : 딥페이크 탐지에 효과적
+- Vision Transformer (ViT) : 이미지 분류 및 이상 탐지
+- LSTM (Long Short-Term Memory) : 비디오 시퀀스 분석
+
+
 
 <br><br>
 
@@ -147,3 +176,5 @@ GAN은 매우 강력한 생성 모델이지만, 몇 가지 단점도 가지고 �
 - What is GAN? : [https://aws.amazon.com/what-is/gan/?nc1=h_ls](https://aws.amazon.com/what-is/gan/?nc1=h_ls)
 - GAN에 대한 이해 : [https://medium.com/@hugmanskj/gan%EC%97%90-%EB%8C%80%ED%95%9C-%EC%9D%B4%ED%95%B4-a073a5425ef2](https://medium.com/@hugmanskj/gan%EC%97%90-%EB%8C%80%ED%95%9C-%EC%9D%B4%ED%95%B4-a073a5425ef2)
 - 누가 진짜일까? 딥페이크 생성과 탐지 : [https://www.samsungsds.com/kr/insights/220411deepfake_1.html](https://www.samsungsds.com/kr/insights/220411deepfake_1.html)
+
+- Keras vs Tensorflow vs Pytorch : https://www.geeksforgeeks.org/keras-vs-tensorflow-vs-pytorch/
