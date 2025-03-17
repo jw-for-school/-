@@ -143,3 +143,7 @@ GAN은 매우 강력한 생성 모델이지만, 몇 가지 단점도 가지고 �
 <br><br>
 
 ## 5. 관련 문서
+
+- What is GAN? : [https://aws.amazon.com/what-is/gan/?nc1=h_ls](https://aws.amazon.com/what-is/gan/?nc1=h_ls)
+- GAN에 대한 이해 : [https://medium.com/@hugmanskj/gan%EC%97%90-%EB%8C%80%ED%95%9C-%EC%9D%B4%ED%95%B4-a073a5425ef2](https://medium.com/@hugmanskj/gan%EC%97%90-%EB%8C%80%ED%95%9C-%EC%9D%B4%ED%95%B4-a073a5425ef2)
+- 누가 진짜일까? 딥페이크 생성과 탐지 : [https://www.samsungsds.com/kr/insights/220411deepfake_1.html](https://www.samsungsds.com/kr/insights/220411deepfake_1.html)
