@@ -1,6 +1,7 @@
 # Deepfake Detection AI Documentation
 
 인공지능 프로그래밍 보고서, 우지원
+
 팀 노션 : https://www.notion.so/AI-Programming-Team-Project-1b39e49e58c9808cafdbd5a6d1ae6b81 
 
 <br>
@@ -26,17 +27,91 @@ __딥페이크(deepfake)__ 란 딥러닝(deep learning)과 가짜(fake)의 혼�
 등의 인경신경망 기술과 같은 기계학습과 인공지능을 활용한다는 점에서 차이가 있다.
 
 딥페이크 기술을 1990년대부터 학술 기관의 연구자들에 의해 개발되었고, 이후에는 온라인 커뮤니티의 아마추어들에 의해 개발되었었다.
-현재는 딥페이크 기술에 대한 접근성이 용이해져 상업적 발전을 이뤄 인더스트리에서 기술이 발전되고 있다
+현재는 딥페이크 기술에 대한 접근성이 용이해져 상업적 발전을 이뤄 인더스트리에서 기술이 발전되고 있다.
 
-이처럼 딥페이크는 인공지능 기술을 발전에 힘입어 상업적으로 많은 발전을 이루며 일반인들에게도 접근성이 낮아졌지만,  ~와 같은 사회적 문제 또한 심화되고 있다
-
-//딥페이스 기술을 나타내는 이미지1, 늘어나는 딥페이크 범죄 표를 나타낸 이미지2
-
+이처럼 딥페이크는 인공지능 기술을 발전에 힘입어 상업적으로 많은 발전을 이루며 일반인들에게도 접근성이 낮아졌지만, 이에 따라 사회적 문제 또한 심화되고 있다.
 
 <br><br>
 
 
 ## 2. 딥페이크의 작동 원리 
+
+### Autoencoder (오토인코더)
+
+오토인코더(Autoencoder)는 입력 데이터를 주요 특징으로 효율적으로 압축(Encode)한 후 이 압축된 표현에서 원본 입력을 재구성(Decode)하도록 설계된 일종의 신경망 아키텍처이다. 
+
+예를 들어 손으로 쓴 숫자의 노이즈가 있는 이미지가 입력으로 주어진 경우, 오토인코더는 이미지를 더 작은 특징 집합으로 압축하고 원본 이미지의 깨끗한 버전을 재구성하여 노이즈를 제거하는 방법을 학습할 수 있다.
+
+오토인코더는 입력과 재구성된 출력의 차이인 재구성 오류(reconstruction error)를 최소화하는 것을 목표로 한다. 
+오토인코더는 Mean Squared Error(MSE) 또는 Binary Cross-Entropy(BCE)와 같은 손실 함수(loss function)를 사용하며 역전파 및 경사 하강법을 통해 최적화한다.
+
+대부분의 오토인코더 유형은 데이터 압축, 이미지 노이즈 제거, 이상 감지 및 안면 인식과 같은 특징 추출과 관련된 인공 지능 작업에 사용된다.
+변분 오토인코더(Variational AutoEncoders-VAE) 및 적대적 오토인코더(Adverserial AutoEncoder-AAE)와 같은 특정 유형의 오토인코더는 이미지 생성이나 시계열 데이터 생성과 같은 생성 작업에 사용하기 위해 오토인코더 아키텍처를 적용한다.
+
+<br>
+
+### 딥러닝에서 Autoencoder의 아키텍처
+
+오토인코더의 아키텍처는 인코터(Encoder), 병목 구간(잠재 공간)(Bottleneck(Latent Space), 디코더(Decoder)라는 세 가지 주요 구성 요소로 이루어진다.
+
+![Image](https://github.com/user-attachments/assets/93ab22a6-67fc-49cc-bf3c-a1e71b77eb33)
+
+#### 1. 인코더(Encoder)
+
+인코더는 입력 데이터를 받아 더 작은 저차원 표현(lower-demensional representation)으로 압축하는 네트워크의 일부이다
+
+(참고 : 여기서 말하는 "네트워크"는 오토인코더를 구성하는 딥러닝 모델(신경망 구조)이다)
+
+- __입력 레이어(Input layer)__ : 원본 데이터(예 : 이미지나 특정 특징 집합)가 네트워크으로 들어오는 곳
+- __은닉층/히든 레이어(Hidden Layers)__ : 입력 데이터를 변환하는 역할을 한다. 인코더(Encoder)는 입력 데이터에서 중요한 특징을 추출하고, 데이터의 차원(dimentionality)을 축소하는 것이 목표
+- __인코더 출력 (잠재 공간, Latent Space)__ : 인코더는 입력 데이터를 압축하여 "잠재 표현(latent representation)" 또는 "인코딩(encoding)"을 생성한다. 원본 데이터의 중요한 특징만을 포함하는 압축된 형태
+
+#### 2. 병목 공간(Bottleneck, Latent Space)
+
+병목 구간은 네트워크에서 가장 작은 차원의 레이어로, 데이터가 가장 압축된 형태로 표현되는 곳이다.
+
+- 입력 데이터를 대표하는 최소한의 중요한 특징을 포함한다
+- 오토인코더는 이 과정을 통해 __입력 데이터의 핵심 패턴과 구조를 학습__ 한다
+
+#### 3. 디코더 (Decoder)
+
+디코더는 잠재 공간의 압축된 표현을 받아 다시 원본 데이터 형태로 복원하는 역할을 한다.
+
+__은닉 레이어 (Hidden Layers)__: 디코더는 여러 개의 레이어를 사용하여 데이터를 점진적으로 복원
+__출력 레이어 (Output Layer)__: 원본 데이터와 유사한 형태로 복원된 결과를 출력
+
+<br>
+
+### 오토인코더 학습에서 손실 함수 (Loss Function)
+
+오토인코더는 학습 과정에서 재구성 손실(reconstruction loss)을 최소화하도록 훈련하고, 원본 입력과 복원된 출력 간의 차이를 측정하는 방식으로 학습이 진행된다
+
+주요 손실 함수(loss function)
+
+- __평균 제곱 오차(MSE, Mean Squared Error)__: 연속적인 데이터에 주로 사용되며, 원본 데이터와 복원된 데이터 간의 평균 제곱 차이를 측정
+- __이진 크로스 엔트로피(Binary Cross-Entropy)__: 입력 데이터가 이진값(0과 1)일 때 사용되며, 확률 차이를 계산하여 손실을 측정
+
+ 네트워크은 이 손실을 최소화하도록 가중치(weight)를 조정하며, 이를 통해 입력 데이터의 핵심적인 특징만 학습하여 잠재 공간에 저장한다
+
+ <br>
+
+ ### 오토인코더의 효율적인 표현 학습 (Efficient Representations)
+
+ 오토인코더는 데이터를 효율적으로 표현하도록 설계될 수 있으며, 이를 위해 몇 가지 기법이 사용된다 
+
+ - __작은 은닉층 유지 (Keep Small Hidden Layers)__ : 은닉층의 크기를 줄이면 네트워크 입력 데이터에서 가장 중요한 특징만을 학습한다. 작은 차원의 은닉층은 중복 정보를 줄이고, 더 효율적인 인코딩을 가능하게 한다.
+ - __정규화 (Regularization)__ : 정규화 기법(L1 또는 L2 정규화)을 사용하면 손실 함수에 페널티 항을 추가하여 네트워크가 과적합(overfitting)되는 것을 방지할 수 있다. 정규화는 네트워크가 일반화된 표현을 학습하도록 유도한다.
+ - __잡음 제거 (Denoising)__ : Denoising Autoencoder(잡음 제거 오토인코더)는 학습 중 입력 데이터에 랜덤한 노이즈를 추가한 후, 이를 제거하는 방식으로 훈련된다. 네트워크가 노이즈가 없는 중요한 특징만 학습하도록 유도하며, 모델의 강건성을 증가시킨다
+ - __활성화 함수 조정 (Tuning Activation Functions)__ : 특정 활성화 함수를 적용하면 희소 표현(Sparse Representation)을 학습할 수 있다.
+   희소성(Sparsity)을 강제하면 네트워크는 일부 뉴런만 활성화하여 입력 데이터에서 가장 유의미한 특징만 학습하게 되고, 이렇게 하면 모델이 단순해지고 효율성이 증가한다.
+
+### 오토인코더의 종류
+
+<br><br>
+
+---
+
+### GAN (생성적 대립 신경망)
 
 생성적 대립 신경망(GAN)은 딥러닝 아키텍처이고, 해당 훈련 데이터 세트에서 더 확실한 새 데이터를 생성하기 위해 두 신경망을 서로 경쟁하도록 훈련시킨다. 
 예를 들어, 기존 이미지 데이터베이스에서 새 이미지를 생성하거나 노래 데이터베이스에서 원본 음악을 생성할 수 있다. GAN은 서로 다른 두 신경망을 훈련하고 경쟁시키기 때문에 대립적이라고 불린다. 
@@ -134,7 +209,28 @@ GAN은 매우 강력한 생성 모델이지만, 몇 가지 단점도 가지고 �
 
 ## 3. 딥페이크 탐지 시스템의 작동 원리
 
+1. 이미지/픽셀 기반 탐지
+   - CNN(Convolutional Neural Networks)과 같은 딥러닝 모델을 사용하여 이미지 내 조작 흔적을 찾음
+   - 얼굴 영역의 불일치, 색상/텍스처 패턴의 비정상적 특징 등을 감지
+   - EfficientNet, ResNet 등의 아키텍처가 자주 사용된다
 
+2. 신체특징 기반 탐지
+   - 눈 깜빡임, 얼굴 표정, 맥박신호(rPPG), 눈/입 동기화 등 생체적 특징을 분석
+
+3. 주파수 기반 탐지
+   - FFT(Fast Fourier Transform)와 같은 주파수 도메인 변환을 통해 분석
+   - GAN 생성 이미지는 특정 주파수 패턴을 가지는 경향이 있어, 이를 통해 탐지
+   - DCT(Discrete Cosine Transform) 계수 분석도 활용
+
+4. 시간적 일관성 분석
+   - 비디오에서 프레임 간 일관성을 분석하여 딥페이크 탐지
+   - 시간에 따른 얼굴 특징의 변화가 자연스러운지 확인
+   - 3D 얼굴 모델링을 통한 일관성 분석도 포함된다
+
+5. 메타데이터/압축 아티팩트 분석
+   - 이미지/비디오 메타데이터 및 압축 특성을 분석
+   - 이중 압축 흔적, 노이즈 패턴 등을 활용
+  
 <br><br>
 
 
@@ -176,12 +272,12 @@ GAN은 매우 강력한 생성 모델이지만, 몇 가지 단점도 가지고 �
 
 - What is GAN? : https://aws.amazon.com/what-is/gan/?nc1=h_ls
 - GAN에 대한 이해 : https://medium.com/@hugmanskj/gan%EC%97%90-%EB%8C%80%ED%95%9C-%EC%9D%B4%ED%95%B4-a073a5425ef2
+- Autoencoders in Machine Learning : https://www.geeksforgeeks.org/auto-encoders/
+- What is an Autoencoder : https://www.ibm.com/think/topics/autoencoder
 - 누가 진짜일까? 딥페이크 생성과 탐지 : https://www.samsungsds.com/kr/insights/220411deepfake_1.html
 - Keras vs Tensorflow vs Pytorch : https://www.geeksforgeeks.org/keras-vs-tensorflow-vs-pytorch/
-- Dlib : https://github.com/davisking/dlib
 - 딥페이크 데이터셋/툴/논문/코드 모음 : https://github.com/Daisy-Zhang/Awesome-Deepfakes?tab=readme-ov-file
-- 오토인코더란?
-- GAN vs Autoencoder
+- Generative Models in AI: A Comprehensive Comparison of GANs and VAEs : https://www.geeksforgeeks.org/generative-models-in-ai-a-comprehensive-comparison-of-gans-and-vaes/
 
 <br>
 
